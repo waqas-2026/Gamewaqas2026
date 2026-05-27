@@ -1,1120 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 40 Trending Games - 2025</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .header {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0,0,0,0.3);
-            color: white;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .game-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .game-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-        .game-thumb {
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-        }
-
-        .game-card:nth-child(8n+1) .game-thumb { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-        .game-card:nth-child(8n+2) .game-thumb { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
-        .game-card:nth-child(8n+3) .game-thumb { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
-        .game-card:nth-child(8n+4) .game-thumb { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
-        .game-card:nth-child(8n+5) .game-thumb { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
-        .game-card:nth-child(8n+6) .game-thumb { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .game-card:nth-child(8n+7) .game-thumb { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .game-card:nth-child(8n+8) .game-thumb { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-
-        .game-info {
-            padding: 0.8rem;
-            text-align: center;
-        }
-
-        .game-info h3 {
-            color: #333;
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .game-info p {
-            color: #666;
-            font-size: 0.85rem;
-        }
-
-        .game-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .game-overlay.active { display: flex; }
-
-        .game-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .game-header h2 { font-size: 1.3rem; }
-
-        .close-btn {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid white;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .close-btn:hover { background: white; color: #667eea; }
-
-        .game-container {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-container canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .games-grid { grid-template-columns: repeat(2, 1fr); padding: 1rem; gap: 0.8rem; }
-            .game-thumb { height: 100px; font-size: 2.5rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🎮 40 Games Hub - Offline Ready</title>
+<style>
+:root{--bg:#0b0f1a;--card:#151b2b;--text:#e2e8f0;--accent:#38bdf8;--accent2:#f472b6}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+#hub{padding:1.5rem;max-width:1200px;margin:0 auto}
+h1{text-align:center;font-size:2rem;margin-bottom:1rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
+.card{background:var(--card);border-radius:14px;overflow:hidden;cursor:pointer;transition:.2s;border:2px solid transparent}
+.card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 20px rgba(56,189,248,.2)}
+.thumb{height:100px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#1e293b,#0f172a)}
+.info{padding:.8rem;text-align:center}
+.info h3{font-size:.95rem;margin-bottom:.2rem}
+.info p{font-size:.75rem;color:#94a3b8}
+.overlay{position:fixed;inset:0;background:var(--bg);z-index:100;display:none;flex-direction:column}
+.overlay.active{display:flex}
+.bar{background:var(--card);padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #334155}
+.bar h2{font-size:1.1rem}
+.btn{background:var(--accent);color:#0b0f1a;border:none;padding:.4rem 1rem;border-radius:8px;font-weight:600;cursor:pointer}
+.btn:hover{opacity:.9}
+.canvas-wrap{flex:1;position:relative;overflow:hidden}
+canvas{display:block;width:100%;height:100%}
+.msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.8);padding:1rem 2rem;border-radius:12px;text-align:center;display:none}
+.msg.show{display:block}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}.thumb{height:80px;font-size:2.5rem}h1{font-size:1.5rem}}
+</style>
 </head>
 <body>
-    <div class="header">
-        <h1>🎮 40 Trending Games 2025</h1>
-        <p>All Games Work Offline • No Internet Needed</p>
-    </div>
+<div id="hub">
+  <h1>🎮 40 Games Hub</h1>
+  <div class="grid" id="grid"></div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="bar">
+    <h2 id="gtitle">Game</h2>
+    <button class="btn" onclick="Hub.close()">← Back</button>
+  </div>
+  <div class="canvas-wrap" id="wrap">
+    <canvas id="c"></canvas>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+<script>
+const Hub={
+  games:[],  current:null,
+  ctx:null,
+  canvas:null,
+  raf:null,
+  keys:{},
+  init(){
+    this.canvas=document.getElementById('c');
+    this.ctx=this.canvas.getContext('2d');
+    this.buildGrid();
+    window.addEventListener('resize',()=>this.resize());
+    window.addEventListener('keydown',e=>this.keys[e.code]=true);
+    window.addEventListener('keyup',e=>this.keys[e.code]=false);
+  },
+  buildGrid(){
+    const g=document.getElementById('grid');
+    this.games.forEach((game,i)=>{
+      const d=document.createElement('div');
+      d.className='card';
+      d.innerHTML=`<div class="thumb">${game.icon}</div><div class="info"><h3>${game.name}</h3><p>${game.desc}</p></div>`;
+      d.onclick=()=>this.open(i);
+      g.appendChild(d);
+    });
+  },
+  resize(){
+    if(!this.current)return;
+    const w=this.wrap.clientWidth,h=this.wrap.clientHeight;
+    this.canvas.width=w;this.canvas.height=h;
+    if(this.current.resize)this.current.resize(w,h);
+  },
+  open(i){
+    this.current=this.games[i];
+    document.getElementById('gtitle').textContent=this.current.icon+' '+this.current.name;
+    document.getElementById('overlay').classList.add('active');
+    this.wrap=document.getElementById('wrap');
+    this.resize();
+    this.current.init(this.canvas,this.ctx,()=>this.close());
+    this.loop();
+  },
+  close(){
+    if(this.raf)cancelAnimationFrame(this.raf);
+    if(this.current&&this.current.cleanup)this.current.cleanup();
+    this.current=null;
+    document.getElementById('overlay').classList.remove('active');
+    document.getElementById('msg').classList.remove('show');
+  },
+  loop(){
+    if(!this.current)return;
+    this.raf=requestAnimationFrame(()=>this.loop());
+    const w=this.canvas.width,h=this.canvas.height;
+    this.ctx.fillStyle='#0b0f1a';    this.ctx.fillRect(0,0,w,h);
+    this.current.update(w,h,this.keys);
+    this.current.draw(this.ctx,w,h);
+  },
+  showMsg(t,btn){
+    const m=document.getElementById('msg');
+    m.innerHTML=t+(btn?`<br><button class="btn" style="margin-top:10px" onclick="Hub.close()">${btn}</button>`:'');
+    m.classList.add('show');
+  }
+};
 
-    <div class="games-grid" id="gamesGrid"></div>
+// GAME FACTORY
+const G=(id,name,icon,desc,init,update,draw,cleanup,resize)=>({id,name,icon,desc,init,update,draw,cleanup,resize});
 
-    <div class="game-overlay" id="gameOverlay">
-        <div class="game-header">            <h2 id="gameTitle">Game</h2>
-            <button class="close-btn" onclick="closeGame()">← Back</button>
-        </div>
-        <div class="game-container" id="gameContainer"></div>
-    </div>
+// 40 GAMES
+Hub.games=[
+  G('cricket','Cricket','🏏','Hit sixes',(c,x,cb)=>{
+    let ball={x:c.width/2,y:50,dy:4},bat={x:c.width/2,w:80},score=0;
+    c.onmousemove=e=>{const r=c.getBoundingClientRect();bat.x=e.clientX-r.left};
+    c.onclick=()=>{if(Math.abs(ball.x-bat.x)<40&&ball.y>c.height-40){ball.dy=-6;score+=6}};
+    Hub.showMsg('Click to Hit | Move Mouse to Bat');
+    return{score,ball,bat};
+  },(w,h,k,d)=>{
+    const{ball,bat}=d;ball.y+=ball.dy;
+    if(ball.y>h){ball.y=50;ball.dy=4}
+    if(ball.y>h-40&&Math.abs(ball.x-bat.x)<40)ball.dy=-Math.abs(ball.dy)*1.1;
+    d.ctx.fillStyle='#22c55e';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#b45309';d.ctx.fillRect(w/2-40,0,80,h);
+    d.ctx.fillStyle='#f43f5e';d.ctx.beginPath();d.ctx.arc(ball.x,ball.y,8,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#92400e';d.ctx.fillRect(bat.x-40,h-30,80,15);
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.score,10,30);
+  }),
+  G('football','Football','⚽','Score goals',(c,x,cb)=>{
+    let ball={x:c.width/2,y:c.height/2,vx:0,vy:0},score=0;
+    c.onclick=e=>{const r=c.getBoundingClientRect();ball.vx=(e.clientX-r.left-ball.x)*0.15;ball.vy=(e.clientY-r.top-ball.y)*0.15};
+    return{ball,score};
+  },(w,h,k,d)=>{
+    const b=d.ball;b.x+=b.vx;b.y+=b.vy;b.vx*=0.98;b.vy*=0.98;
+    if(b.x<0||b.x>w)b.vx*=-1;if(b.y<0||b.y>h)b.vy*=-1;
+    d.ctx.fillStyle='#166534';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#fff';d.ctx.fillRect(w/2-60,20,120,40);
+    d.ctx.fillStyle='#fff';d.ctx.beginPath();d.ctx.arc(b.x,b.y,10,0,7);d.ctx.fill();
+    if(b.y<60&&b.x>w/2-60&&b.x<w/2+60){d.score++;b.x=w/2;b.y=h/2}
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Goals: '+d.score,10,30);
+  }),
+  G('hockey','Hockey','🏑','Air Hockey',(c,x,cb)=>{
+    let puck={x:c.width/2,y:c.height/2,vx:3,vy:2},p1=c.width/2,p2=c.width/2,s1=0,s2=0;
+    c.onmousemove=e=>{const r=c.getBoundingClientRect();p1=e.clientX-r.left};
+    return{puck,p1,p2,s1,s2};
+  },(w,h,k,d)=>{    const p=d.puck;p.x+=p.vx;p.y+=p.vy;
+    if(p.x<10||p.x>w-10)p.vx*=-1;
+    if(p.y<10){d.s2++;p.x=w/2;p.y=h/2;p.vx=3;p.vy=2}
+    if(p.y>h-10){d.s1++;p.x=w/2;p.y=h/2;p.vx=-3;p.vy=-2}
+    d.p1+=(p.x-d.p1)*0.1;d.p2+=(p.x-d.p2)*0.05;
+    if(Math.hypot(p.x-d.p1,p.y-(h-30))<25)p.vy=-Math.abs(p.vy);
+    if(Math.hypot(p.x-d.p2,p.y-30)<25)p.vy=Math.abs(p.vy);
+    d.ctx.fillStyle='#1e3a8a';d.ctx.fillRect(0,0,w,h);
+    d.ctx.strokeStyle='#fff';d.ctx.beginPath();d.ctx.moveTo(0,h/2);d.ctx.lineTo(w,h/2);d.ctx.stroke();
+    d.ctx.fillStyle='#ef4444';d.ctx.beginPath();d.ctx.arc(d.p1,h-30,25,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#3b82f6';d.ctx.beginPath();d.ctx.arc(d.p2,30,25,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#000';d.ctx.beginPath();d.ctx.arc(p.x,p.y,12,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText(d.s1+' - '+d.s2,w/2-20,30);
+  }),
+  G('ludo','Ludo','','Roll & Move',(c,x,cb)=>{
+    let dice=1,turn=0;
+    c.onclick=()=>{dice=Math.floor(Math.random()*6)+1;turn=(turn+1)%4};
+    return{dice,turn};
+  },(w,h,k,d)=>{
+    d.ctx.fillStyle='#f0f9ff';d.ctx.fillRect(0,0,w,h);
+    const sz=Math.min(w,h)*0.6,ox=(w-sz)/2,oy=(h-sz)/2;
+    d.ctx.fillStyle='#fff';d.ctx.fillRect(ox,oy,sz,sz);
+    d.ctx.strokeStyle='#334155';d.ctx.strokeRect(ox,oy,sz,sz);
+    for(let i=0;i<4;i++){d.ctx.fillStyle=['#ef4444','#3b82f6','#eab308','#22c55e'][i];d.ctx.fillRect(ox+i*sz/4,oy,sz/4,sz/4)}
+    d.ctx.fillStyle='#000';d.ctx.font='bold 40px sans-serif';d.ctx.textAlign='center';d.ctx.fillText('🎲 '+d.dice,w/2,h/2+10);
+    d.ctx.fillStyle='#64748b';d.ctx.font='16px sans-serif';d.ctx.fillText('Turn: '+['Red','Blue','Yellow','Green'][d.turn],w/2,h-20);
+    d.ctx.textAlign='start';
+  }),
+  G('carrom','Carrom','','Strike & Pocket',(c,x,cb)=>{
+    let s={x:c.width/2,y:c.height-50,vx:0,vy:0},coins=[{x:c.width/2,y:c.height/2,r:10,c:'#fff'},{x:c.width/2-20,y:c.height/2-20,r:8,c:'#000'},{x:c.width/2+20,y:c.height/2-20,r:8,c:'#000'}];
+    let drag=false;
+    c.onmousedown=e=>{const r=c.getBoundingClientRect();if(Math.hypot(e.clientX-r.left-s.x,e.clientY-r.top-s.y)<20)drag=true};
+    c.onmousemove=e=>{if(drag){const r=c.getBoundingClientRect();s.x=e.clientX-r.left;s.y=e.clientY-r.top}};
+    c.onmouseup=e=>{if(drag){drag=false;s.vx=(c.width/2-s.x)*0.1;s.vy=(c.height-50-s.y)*0.1}};
+    return{s,coins};
+  },(w,h,k,d)=>{
+    const s=d.s;s.x+=s.vx;s.y+=s.vy;s.vx*=0.98;s.vy*=0.98;
+    if(s.x<10||s.x>w-10)s.vx*=-1;if(s.y<10||s.y>h-10)s.vy*=-1;
+    d.ctx.fillStyle='#d4a373';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#000';[[15,15],[w-15,15],[15,h-15],[w-15,h-15]].forEach(p=>{d.ctx.beginPath();d.ctx.arc(p[0],p[1],15,0,7);d.ctx.fill()});
+    d.coins.forEach(c=>{d.ctx.fillStyle=c.c;d.ctx.beginPath();d.ctx.arc(c.x,c.y,c.r,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#ef4444';d.ctx.beginPath();d.ctx.arc(s.x,s.y,15,0,7);d.ctx.fill();
+  }),
+  G('snooker','Snooker','🎱','Pool Table',(c,x,cb)=>{
+    let cb={x:150,y:200,vx:0,vy:0},balls=[],aim=0;
+    for(let r=0;r<4;r++)for(let c=0;c<=r;c++)balls.push({x:400+r*18,y:200-r*9+c*18,r:9,c:['#ef4444','#eab308','#22c55e','#3b82f6'][Math.floor(Math.random()*4)],vx:0,vy:0});
+    c.onmousemove=e=>{const r=c.getBoundingClientRect();aim=Math.atan2(e.clientY-r.top-cb.y,e.clientX-r.left-cb.x)};
+    c.onclick=()=>{if(!cb.vx){cb.vx=Math.cos(aim)*10;cb.vy=Math.sin(aim)*10}};
+    return{cb,balls,aim};
+  },(w,h,k,d)=>{    const b=d.cb;b.x+=b.vx;b.y+=b.vy;b.vx*=0.98;b.vy*=0.98;
+    if(b.x<8||b.x>w-8)b.vx*=-1;if(b.y<8||b.y>h-8)b.vy*=-1;
+    d.balls.forEach(b=>{b.x+=b.vx;b.y+=b.vy;b.vx*=0.98;b.vy*=0.98;if(b.x<8||b.x>w-8)b.vx*=-1;if(b.y<8||b.y>h-8)b.vy*=-1});
+    d.ctx.fillStyle='#064e3b';d.ctx.fillRect(0,0,w,h);
+    d.balls.forEach(b=>{d.ctx.fillStyle=b.c;d.ctx.beginPath();d.ctx.arc(b.x,b.y,b.r,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#fff';d.ctx.beginPath();d.ctx.arc(d.cb.x,d.cb.y,8,0,7);d.ctx.fill();
+    d.ctx.strokeStyle='#92400e';d.ctx.lineWidth=4;d.ctx.beginPath();d.ctx.moveTo(d.cb.x,d.cb.y);d.ctx.lineTo(d.cb.x-Math.cos(d.aim)*80,d.cb.y-Math.sin(d.aim)*80);d.ctx.stroke();
+  }),
+  G('patti','Teen Patti','🃏','Card Game',(c,x,cb)=>{
+    let cards=[],chips=1000;
+    c.onclick=()=>{cards=[];for(let i=0;i<3;i++)cards.push({v:['A','K','Q','J','10','9'][Math.floor(Math.random()*6)],s:['♠','♥','♦','♣'][Math.floor(Math.random()*4)]})};
+    return{cards,chips};
+  },(w,h,k,d)=>{
+    d.ctx.fillStyle='#0f172a';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 24px sans-serif';d.ctx.textAlign='center';d.ctx.fillText('💰 '+d.chips,w/2,40);
+    d.cards.forEach((c,i)=>{
+      const cx=w/2+(i-1)*80,cy=h/2;
+      d.ctx.fillStyle='#fff';d.ctx.fillRect(cx-30,cy-45,60,90);
+      d.ctx.fillStyle=c.s==='♥'||c.s==='♦'?'#ef4444':'#000';
+      d.ctx.font='20px sans-serif';d.ctx.fillText(c.v+c.s,cx,cy+5);
+    });
+    d.ctx.fillStyle='#94a3b8';d.ctx.font='14px sans-serif';d.ctx.fillText('Click to Deal',w/2,h-20);
+    d.ctx.textAlign='start';
+  }),
+  G('snake','Snake','','Classic',(c,x,cb)=>{
+    let s=[{x:10,y:10}],f={x:15,y:15},dx=1,dy=0,sc=0,spd=100,last=0;
+    return{s,f,dx,dy,sc,spd,last};
+  },(w,h,k,d)=>{
+    const t=performance.now();if(t-d.last<d.spd)return;d.last=t;
+    const g=20,cols=Math.floor(w/g),rows=Math.floor(h/g);
+    if(k['ArrowUp']&&d.dy===0){d.dx=0;d.dy=-1}if(k['ArrowDown']&&d.dy===0){d.dx=0;d.dy=1}
+    if(k['ArrowLeft']&&d.dx===0){d.dx=-1;d.dy=0}if(k['ArrowRight']&&d.dx===0){d.dx=1;d.dy=0}
+    const nh={x:d.s[0].x+d.dx,y:d.s[0].y+d.dy};
+    if(nh.x<0||nh.x>=cols||nh.y<0||nh.y>=rows||d.s.some(s=>s.x===nh.x&&s.y===nh.y)){Hub.showMsg('Game Over! Score: '+d.sc,'Restart');Hub.current=null;return}
+    d.s.unshift(nh);
+    if(nh.x===d.f.x&&nh.y===d.f.y){d.sc+=10;d.f={x:Math.floor(Math.random()*cols),y:Math.floor(Math.random()*rows)}}else d.s.pop();
+    d.ctx.fillStyle='#000';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#22c55e';d.s.forEach(s=>d.ctx.fillRect(s.x*g,s.y*g,g-2,g-2));
+    d.ctx.fillStyle='#ef4444';d.ctx.fillRect(d.f.x*g,d.f.y*g,g-2,g-2);
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('tetris','Tetris','📦','Stack Blocks',(c,x,cb)=>{
+    const cols=10,rows=20,sz=30;
+    let grid=Array(rows).fill().map(()=>Array(cols).fill(0)),piece=null,px=4,py=0,sc=0,spd=500,last=0;
+    function spawn(){const p=[[1,1,1,1],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]]][Math.floor(Math.random()*5)];piece={m:p,x:4,y:0}}
+    spawn();
+    return{grid,piece,px,py,sc,spd,last,cols,rows,sz};
+  },(w,h,k,d)=>{
+    const t=performance.now();if(t-d.last>d.spd){d.last=t;
+    if(canPlace(d.grid,d.piece,d.px,d.py+1)){d.piece.y++}else{merge(d.grid,d.piece,d.px,d.piece.y);clearLines(d.grid);d.sc+=10;spawn()}    if(k['ArrowLeft']&&canPlace(d.grid,d.piece,d.px-1,d.piece.y))d.px--;
+    if(k['ArrowRight']&&canPlace(d.grid,d.piece,d.px+1,d.piece.y))d.px++;
+    if(k['ArrowDown']&&canPlace(d.grid,d.piece,d.px,d.piece.y+1))d.piece.y++;
+    if(k['ArrowUp'])rotate(d.piece.m);}
+    drawTetris(d);
+  }),
+  G('pacman','Pac-Man','','Eat Dots',(c,x,cb)=>{
+    let p={x:1,y:1},ghosts=[{x:8,y:8},{x:2,y:8}],dots=[],sc=0;
+    for(let y=0;y<10;y++)for(let x=0;x<10;x++)if((x+y)%2===0)dots.push({x,y});
+    return{p,ghosts,dots,sc};
+  },(w,h,k,d)=>{
+    const g=Math.min(w,h)/12;
+    if(k['ArrowUp']&&d.p.y>0)d.p.y--;if(k['ArrowDown']&&d.p.y<9)d.p.y++;
+    if(k['ArrowLeft']&&d.p.x>0)d.p.x--;if(k['ArrowRight']&&d.p.x<9)d.p.x++;
+    d.ghosts.forEach(g=>{const m=[[0,1],[0,-1],[1,0],[-1,0]][Math.floor(Math.random()*4)];g.x=Math.max(0,Math.min(9,g.x+m[0]));g.y=Math.max(0,Math.min(9,g.y+m[1]))});
+    d.dots=d.dots.filter(dot=>{if(dot.x===d.p.x&&dot.y===d.p.y){d.sc+=10;return false}return true});
+    d.ctx.fillStyle='#000';d.ctx.fillRect(0,0,w,h);
+    d.dots.forEach(dot=>{d.ctx.fillStyle='#fbbf24';d.ctx.beginPath();d.ctx.arc(dot.x*g+g/2,dot.y*g+g/2,g/4,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#facc15';d.ctx.beginPath();d.ctx.arc(d.p.x*g+g/2,d.p.y*g+g/2,g/2,0,7);d.ctx.fill();
+    d.ghosts.forEach(g=>{d.ctx.fillStyle='#ef4444';d.ctx.beginPath();d.ctx.arc(g.x*g+g/2,g.y*g+g/2,g/2,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('flappy','Flappy Bird','🐦','Tap to Fly',(c,x,cb)=>{
+    let b={y:c.height/2,vy:0},pipes=[],sc=0,spd=3,frame=0;
+    c.onclick=c.ontouchstart=()=>{b.vy=-7};
+    return{b,pipes,sc,spd,frame};
+  },(w,h,k,d)=>{
+    d.b.vy+=0.4;d.b.y+=d.b.vy;d.frame++;
+    if(d.frame%80===0){const gap=150,ty=Math.random()*(h-gap-100)+50;pipes.push({x:w,top:ty,bot:ty+gap})}
+    pipes.forEach(p=>{p.x-=d.spd;if(p.x+d.w<0)pipes.shift()});
+    if(d.b.y>h||d.b.y<0){Hub.showMsg('Crash! Score: '+d.sc,'Retry');Hub.current=null;return}
+    pipes.forEach(p=>{if(d.b.y<p.top||d.b.y>p.bot){if(d.b.x+15>p.x&&d.b.x-15<p.x+d.w){Hub.showMsg('Hit! Score: '+d.sc,'Retry');Hub.current=null}}if(p.x===20)d.sc++});
+    d.ctx.fillStyle='#38bdf8';d.ctx.fillRect(0,0,w,h);
+    pipes.forEach(p=>{d.ctx.fillStyle='#22c55e';d.ctx.fillRect(p.x,0,p.w,p.top);d.ctx.fillRect(p.x,p.bot,p.w,h-p.bot)});
+    d.ctx.fillStyle='#facc15';d.ctx.beginPath();d.ctx.arc(d.b.x,d.b.y,15,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  },{w:60}),
+  G('racing','Car Race','🏎️','Dodge Traffic',(c,x,cb)=>{
+    let car={x:c.width/2},obs=[],sc=0,spd=5;
+    return{car,obs,sc,spd};
+  },(w,h,k,d)=>{
+    if(k['ArrowLeft'])d.car.x-=8;if(k['ArrowRight'])d.car.x+=8;
+    d.car.x=Math.max(30,Math.min(w-30,d.car.x));
+    if(Math.random()<0.05)d.obs.push({x:Math.random()*(w-60)+30,y:-40});
+    d.obs.forEach(o=>{o.y+=d.spd;if(o.y>h){d.obs.shift();d.sc++}if(Math.abs(o.x-d.car.x)<30&&o.y>h-60&&o.y<h){Hub.showMsg('Crash! Score: '+d.sc,'Retry');Hub.current=null}});
+    d.ctx.fillStyle='#334155';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#94a3b8';for(let i=0;i<h;i+=40)d.ctx.fillRect(w/2-2,i,4,20);
+    d.ctx.fillStyle='#ef4444';d.ctx.fillRect(d.car.x-20,h-60,40,60);
+    d.obs.forEach(o=>{d.ctx.fillStyle='#3b82f6';d.ctx.fillRect(o.x-20,o.y,40,60)});
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);  }),
+  G('shooter','Space Shooter','🚀','Shoot Aliens',(c,x,cb)=>{
+    let p={x:c.width/2},bullets=[],enemies=[],sc=0;
+    c.onmousemove=e=>{const r=c.getBoundingClientRect();p.x=e.clientX-r.left};
+    c.onclick=()=>bullets.push({x:p.x,y:c.height-40});
+    return{p,bullets,enemies,sc};
+  },(w,h,k,d)=>{
+    if(Math.random()<0.03)d.enemies.push({x:Math.random()*(w-30)+15,y:-20});
+    d.bullets.forEach(b=>b.y-=8);d.enemies.forEach(e=>e.y+=3);
+    d.bullets=d.bullets.filter(b=>b.y>0);d.enemies=d.enemies.filter(e=>{if(e.y>h)return false;if(bulletsHit(bullets,e)){d.sc++;return false}return true});
+    d.ctx.fillStyle='#020617';d.ctx.fillRect(0,0,w,h);
+    d.bullets.forEach(b=>{d.ctx.fillStyle='#fbbf24';d.ctx.fillRect(b.x-2,b.y,4,10)});
+    d.enemies.forEach(e=>{d.ctx.fillStyle='#ef4444';d.ctx.beginPath();d.ctx.arc(e.x,e.y,15,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#38bdf8';d.ctx.beginPath();d.ctx.moveTo(d.p.x,h-30);d.ctx.lineTo(d.p.x-15,h);d.ctx.lineTo(d.p.x+15,h);d.ctx.fill();
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('puzzle','Jigsaw','🧩','Slide Puzzle',(c,x,cb)=>{
+    let tiles=[1,2,3,4,5,6,7,8,0],moves=0;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=Math.min(w,h)/3.5,col=Math.floor((e.clientX-r.left)/sz),row=Math.floor((e.clientY-r.top)/sz),idx=row*3+col;
+    const ei=tiles.indexOf(0);if(Math.abs(ei-idx)===1||Math.abs(ei-idx)===3){[tiles[ei],tiles[idx]]=[tiles[idx],tiles[ei]];moves++}};
+    return{tiles,moves};
+  },(w,h,k,d)=>{
+    const sz=Math.min(w,h)/3.5,ox=(w-sz*3)/2,oy=(h-sz*3)/2;
+    d.tiles.forEach((t,i)=>{if(t===0)return;const r=Math.floor(i/3),c=i%3;d.ctx.fillStyle='#1e293b';d.ctx.fillRect(ox+c*sz,oy+r*sz,sz-4,sz-4);d.ctx.fillStyle='#fff';d.ctx.font='bold 30px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(t,ox+c*sz+sz/2,oy+r*sz+sz/2+10)});
+    d.ctx.fillStyle='#94a3b8';d.ctx.font='16px sans-serif';d.ctx.textAlign='center';d.ctx.fillText('Moves: '+d.moves,w/2,h-20);d.ctx.textAlign='start';
+  }),
+  G('memory','Memory','🧠','Match Pairs',(c,x,cb)=>{
+    const icons=['🍎','🍌','','🍉','🍒',''];let deck=[...icons,...icons].sort(()=>Math.random()-.5),flipped=[],matched=[];
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=60,gap=10,cols=4,rows=2;
+    const col=Math.floor((e.clientX-r.left-50)/sz),row=Math.floor((e.clientY-r.top-50)/sz);
+    if(col<0||col>=cols||row<0||row>=rows)return;const idx=row*cols+col;
+    if(flipped.length<2&&!flipped.includes(idx)&&!matched.includes(idx)){flipped.push(idx);if(flipped.length===2)check()}};
+    function check(){if(deck[flipped[0]]===deck[flipped[1]])matched.push(...flipped);setTimeout(()=>flipped=[],500)}
+    return{deck,flipped,matched};
+  },(w,h,k,d)=>{
+    const sz=60,gap=10,ox=(w-sz*4-gap*3)/2,oy=(h-sz*2-gap)/2;
+    d.deck.forEach((icon,i)=>{const r=Math.floor(i/4),c=i%4;const isFlip=d.flipped.includes(i)||d.matched.includes(i);
+    d.ctx.fillStyle=isFlip?'#334155':'#1e293b';d.ctx.fillRect(ox+c*(sz+gap),oy+r*(sz+gap),sz,sz);
+    if(isFlip){d.ctx.fillStyle='#fff';d.ctx.font='30px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(icon,ox+c*(sz+gap)+sz/2,oy+r*(sz+gap)+sz/2+10)}});
+    if(d.matched.length===12)Hub.showMsg('🎉 You Win!','Back');
+  }),
+  G('chess','Chess','♟️','Simplified',(c,x,cb)=>{
+    let board=['R','N','B','Q','K','B','N','R','P','P','P','P','P','P','P','P',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'p','p','p','p','p','p','p','p','r','n','b','q','k','b','n','r'],turn='w',sel=null;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=Math.min(w,h)/8,col=Math.floor((e.clientX-r.left)/sz),row=Math.floor((e.clientY-r.top)/sz),idx=row*8+col;
+    if(sel===null){if(board[idx]&&((turn==='w'&&board[idx]===board[idx].toUpperCase())||(turn==='b'&&board[idx]===board[idx].toLowerCase())))sel=idx}
+    else{board[idx]=board[sel];board[sel]=0;sel=null;turn=turn==='w'?'b':'w'}};
+    return{board,turn,sel};
+  },(w,h,k,d)=>{
+    const sz=Math.min(w,h)/8;
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){d.ctx.fillStyle=(r+c)%2?'#b45309':'#fbbf24';d.ctx.fillRect(c*sz,r*sz,sz,sz);    const p=d.board[r*8+c];if(p){d.ctx.fillStyle='#000';d.ctx.font='30px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(p,c*sz+sz/2,r*sz+sz/2+10)}}
+    d.ctx.fillStyle='#fff';d.ctx.font='16px sans-serif';d.ctx.textAlign='start';d.ctx.fillText('Turn: '+d.turn,10,20);
+  }),
+  G('checkers','Checkers','⚫','Jump & Capture',(c,x,cb)=>{
+    let board=Array(64).fill(null);for(let r=0;r<3;r++)for(let c=0;c<8;c++)if((r+c)%2)board[r*8+c]='b';
+    for(let r=5;r<8;r++)for(let c=0;c<8;c++)if((r+c)%2)board[r*8+c]='r';
+    let sel=null,turn='r';
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=Math.min(w,h)/8,col=Math.floor((e.clientX-r.left)/sz),row=Math.floor((e.clientY-r.top)/sz),idx=row*8+col;
+    if(sel===null){if(board[idx]===turn)sel=idx}else{if(!board[idx]){board[idx]=board[sel];board[sel]=null;sel=null;turn=turn==='r'?'b':'r'}}};
+    return{board,sel,turn};
+  },(w,h,k,d)=>{
+    const sz=Math.min(w,h)/8;
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){d.ctx.fillStyle=(r+c)%2?'#064e3b':'#10b981';d.ctx.fillRect(c*sz,r*sz,sz,sz);
+    if(d.board[r*8+c]){d.ctx.fillStyle=d.board[r*8+c]==='r'?'#ef4444':'#000';d.ctx.beginPath();d.ctx.arc(c*sz+sz/2,r*sz+sz/2,sz/3,0,7);d.ctx.fill()}}
+    d.ctx.fillStyle='#fff';d.ctx.font='16px sans-serif';d.ctx.fillText('Turn: '+d.turn,10,20);
+  }),
+  G('tictactoe','Tic Tac Toe','⭕','X vs O',(c,x,cb)=>{
+    let b=Array(9).fill(''),t='X',win=false;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=Math.min(w,h)/3,col=Math.floor((e.clientX-r.left)/sz),row=Math.floor((e.clientY-r.top)/sz),i=row*3+col;
+    if(!b[i]&&!win){b[i]=t;if(checkWin(b)){win=true;Hub.showMsg(t+' Wins!','Back')}else if(!b.includes('')){win=true;Hub.showMsg('Draw!','Back')}t=t==='X'?'O':'X'}};
+    function checkWin(b){return[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(w=>b[w[0]]&&b[w[0]]===b[w[1]]&&b[w[1]]===b[w[2]])}
+    return{b,t,win};
+  },(w,h,k,d)=>{
+    const sz=Math.min(w,h)/3,ox=(w-sz*3)/2,oy=(h-sz*3)/2;
+    d.b.forEach((v,i)=>{const r=Math.floor(i/3),c=i%3;d.ctx.strokeStyle='#475569';d.ctx.lineWidth=4;d.ctx.strokeRect(ox+c*sz,oy+r*sz,sz,sz);
+    if(v){d.ctx.fillStyle='#fff';d.ctx.font='bold 50px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(v,ox+c*sz+sz/2,oy+r*sz+sz/2+15)}});
+  }),
+  G('basketball','Basketball','🏀','Shoot Hoops',(c,x,cb)=>{
+    let b={x:c.width/2,y:c.height-50,vy:0,vx:0},hoop={x:c.width/2,y:100},sc=0,drag=false;
+    c.onmousedown=e=>{drag=true;b.x=e.clientX-c.getBoundingClientRect().left;b.y=e.clientY-c.getBoundingClientRect().top};
+    c.onmousemove=e=>{if(drag){const r=c.getBoundingClientRect();b.x=e.clientX-r.left;b.y=e.clientY-r.top}};
+    c.onmouseup=e=>{if(drag){drag=false;const r=c.getBoundingClientRect();b.vx=(e.clientX-r.left-b.x)*0.2;b.vy=(e.clientY-r.top-b.y)*0.2}};
+    return{b,hoop,sc,drag};
+  },(w,h,k,d)=>{
+    d.b.vy+=0.3;d.b.x+=d.b.vx;d.b.y+=d.b.vy;
+    if(d.b.y>h){d.b.x=w/2;d.b.y=h-50;d.b.vx=0;d.b.vy=0}
+    if(d.b.y<hoop.y+20&&d.b.y>hoop.y-20&&Math.abs(d.b.x-hoop.x)<30&&d.b.vy>0){d.sc++;d.b.x=w/2;d.b.y=h-50;d.b.vx=0;d.b.vy=0}
+    d.ctx.fillStyle='#1e293b';d.ctx.fillRect(0,0,w,h);
+    d.ctx.strokeStyle='#fff';d.ctx.lineWidth=4;d.ctx.beginPath();d.ctx.moveTo(hoop.x-40,hoop.y);d.ctx.lineTo(hoop.x+40,hoop.y);d.ctx.stroke();
+    d.ctx.fillStyle='#f59e0b';d.ctx.beginPath();d.ctx.arc(d.b.x,d.b.y,15,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('tennis','Tennis','🎾','Pong Clone',(c,x,cb)=>{
+    let ball={x:c.width/2,y:c.height/2,vx:4,vy:3},p1=c.height/2,p2=c.height/2,s1=0,s2=0;
+    c.onmousemove=e=>{const r=c.getBoundingClientRect();p1=e.clientY-r.top};
+    return{ball,p1,p2,s1,s2};
+  },(w,h,k,d)=>{
+    const b=d.ball;b.x+=b.vx;b.y+=b.vy;p2+=(b.y-p2)*0.08;
+    if(b.y<0||b.y>h)b.vy*=-1;
+    if(b.x<20&&Math.abs(b.y-d.p1)<40)b.vx=Math.abs(b.vx);    if(b.x>w-20&&Math.abs(b.y-d.p2)<40)b.vx=-Math.abs(b.vx);
+    if(b.x<0){d.s2++;b.x=w/2;b.y=h/2}if(b.x>w){d.s1++;b.x=w/2;b.y=h/2}
+    d.ctx.fillStyle='#0f172a';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#fff';d.ctx.fillRect(0,d.p1-40,10,80);d.ctx.fillRect(w-10,d.p2-40,10,80);
+    d.ctx.beginPath();d.ctx.arc(b.x,b.y,8,0,7);d.ctx.fill();
+    d.ctx.font='bold 30px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(d.s1+' - '+d.s2,w/2,40);d.ctx.textAlign='start';
+  }),
+  G('golf','Golf','','Hole in One',(c,x,cb)=>{
+    let ball={x:100,y:c.height-100,vx:0,vy:0},hole={x:c.width-100,y:c.height-100},par=3,strokes=0,drag=false;
+    c.onmousedown=e=>{drag=true};c.onmouseup=e=>{if(drag){drag=false;const r=c.getBoundingClientRect();ball.vx=(e.clientX-r.left-ball.x)*0.1;ball.vy=(e.clientY-r.top-ball.y)*0.1;strokes++}};
+    return{ball,hole,par,strokes,drag};
+  },(w,h,k,d)=>{
+    d.ball.vx*=0.98;d.ball.vy*=0.98;d.ball.x+=d.ball.vx;d.ball.y+=d.ball.vy;
+    if(d.ball.x<0||d.ball.x>w)d.ball.vx*=-1;if(d.ball.y<0||d.ball.y>h)d.ball.vy*=-1;
+    if(Math.hypot(d.ball.x-d.hole.x,d.ball.y-d.hole.y)<20){Hub.showMsg('Hole in '+d.strokes+'! Par: '+d.par,'Next');Hub.current=null}
+    d.ctx.fillStyle='#166534';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#fff';d.ctx.beginPath();d.ctx.arc(d.ball.x,d.ball.y,8,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#000';d.ctx.fillRect(d.hole.x-10,d.hole.y-10,20,20);
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Strokes: '+d.strokes,10,30);
+  }),
+  G('bowling','Bowling','🎳','Strike',(c,x,cb)=>{
+    let ball={x:c.width/2,y:c.height-50,vx:0,vy:0},pins=Array(10).fill(true),sc=0,drag=false;
+    c.onmousedown=e=>{drag=true};c.onmouseup=e=>{if(drag){drag=false;ball.vx=(Math.random()-.5)*4;ball.vy=-8}};
+    return{ball,pins,sc,drag};
+  },(w,h,k,d)=>{
+    d.ball.x+=d.ball.vx;d.ball.y+=d.ball.vy;d.ball.vy*=0.99;
+    if(d.ball.y<50){d.pins.forEach((p,i)=>{if(p&&Math.abs(d.ball.x-(w/2+(i%4-1.5)*30))<20&&d.ball.y<100+i*10){d.pins[i]=false;d.sc++}});d.ball.x=w/2;d.ball.y=h-50;d.ball.vx=0;d.ball.vy=0}
+    d.ctx.fillStyle='#1e293b';d.ctx.fillRect(0,0,w,h);
+    d.pins.forEach((p,i)=>{if(!p)return;d.ctx.fillStyle='#fff';d.ctx.beginPath();d.ctx.arc(w/2+(i%4-1.5)*30,100+i*10,10,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#ef4444';d.ctx.beginPath();d.ctx.arc(d.ball.x,d.ball.y,12,0,7);d.ctx.fill();
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Pins: '+d.sc,10,30);
+  }),
+  G('fishing','Fishing','🎣','Catch Fish',(c,x,cb)=>{
+    let fish=[],sc=0,rod=c.width/2;
+    setInterval(()=>fish.push({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*3+1}),1000);
+    c.onclick=e=>{const r=c.getBoundingClientRect();rod=e.clientX-r.left;fish.forEach(f=>{if(Math.hypot(f.x-rod,f.y-c.height/2)<30){f.caught=true;sc++}})};
+    return{fish,sc,rod};
+  },(w,h,k,d)=>{
+    d.fish=d.fish.filter(f=>{f.x+=f.s;if(f.x>w)f.x=0;if(f.caught)return false;return true});
+    d.ctx.fillStyle='#0284c7';d.ctx.fillRect(0,0,w,h);
+    d.fish.forEach(f=>{d.ctx.fillStyle=f.caught?'#fbbf24':'#f87171';d.ctx.beginPath();d.ctx.arc(f.x,f.y,10,0,7);d.ctx.fill()});
+    d.ctx.strokeStyle='#000';d.ctx.lineWidth=2;d.ctx.beginPath();d.ctx.moveTo(d.rod,0);d.ctx.lineTo(d.rod,h/2);d.ctx.stroke();
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Fish: '+d.sc,10,30);
+  }),
+  G('cooking','Cooking','🍳','Flip Pancakes',(c,x,cb)=>{
+    let pan=c.width/2,pancakes=[],sc=0;
+    setInterval(()=>pancakes.push({x:pan,y:50,vy:0,cooked:false}),2000);
+    c.onmousemove=e=>{const r=c.getBoundingClientRect();pan=e.clientX-r.left};
+    c.onclick=()=>pancakes.forEach(p=>{if(p.y>h-50&&!p.cooked){p.vy=-8;p.cooked=true;sc++}});
+    return{pan,pancakes,sc};  },(w,h,k,d)=>{
+    d.pancakes.forEach(p=>{p.vy+=0.3;p.y+=p.vy});d.pancakes=d.pancakes.filter(p=>p.y<h);
+    d.ctx.fillStyle='#f0f9ff';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#94a3b8';d.ctx.fillRect(pan-40,h-60,80,10);
+    d.pancakes.forEach(p=>{d.ctx.fillStyle=p.cooked?'#b45309':'#fbbf24';d.ctx.beginPath();d.ctx.arc(p.x,p.y,15,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#000';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Cooked: '+d.sc,10,30);
+  }),
+  G('dressup','Dress Up','👗','Style',(c,x,cb)=>{
+    let outfits=['👕','👗','👖','🧥','👒','👠'],sel=0;
+    c.onclick=()=>sel=(sel+1)%outfits.length;
+    return{outfits,sel};
+  },(w,h,k,d)=>{
+    d.ctx.fillStyle='#fef3c7';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#000';d.ctx.font='100px sans-serif';d.ctx.textAlign='center';d.ctx.fillText('🧍',w/2,h/2-50);
+    d.ctx.font='80px sans-serif';d.ctx.fillText(d.outfits[d.sel],w/2,h/2+50);
+    d.ctx.fillStyle='#64748b';d.ctx.font='20px sans-serif';d.ctx.fillText('Click to Change',w/2,h-20);d.ctx.textAlign='start';
+  }),
+  G('painting','Painting','','Draw',(c,x,cb)=>{
+    let draw=false,col='#ef4444';
+    c.onmousedown=e=>{draw=true};c.onmousemove=e=>{if(draw){const r=c.getBoundingClientRect();d.ctx.fillStyle=col;d.ctx.beginPath();d.ctx.arc(e.clientX-r.left,e.clientY-r.top,5,0,7);d.ctx.fill()}};c.onmouseup=()=>draw=false;
+    return{draw,col};
+  },(w,h,k,d)=>{
+    d.ctx.fillStyle='#fff';d.ctx.fillRect(0,0,w,h);
+    d.ctx.fillStyle='#000';d.ctx.font='16px sans-serif';d.ctx.fillText('Click & Drag to Draw',10,30);
+  }),
+  G('piano','Piano','🎹','Keys',(c,x,cb)=>{
+    let keys=['C','D','E','F','G','A','B'],active=-1;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),k=Math.floor((e.clientX-r.left)/(w/7));active=k;setTimeout(()=>active=-1,200)};
+    return{keys,active};
+  },(w,h,k,d)=>{
+    d.keys.forEach((k,i)=>{const x=i*(w/7),y=h-150;d.ctx.fillStyle=d.active===i?'#fbbf24':'#fff';d.ctx.fillRect(x+2,y,w/7-4,150);d.ctx.fillStyle='#000';d.ctx.font='20px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(k,x+w/14,y+80)});
+  }),
+  G('drums','Drums','🥁','Beat',(c,x,cb)=>{
+    let pads=['🥁','🥁','','🥁'],last=0;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),i=Math.floor((e.clientX-r.left)/(w/4));pads[i]='';setTimeout(()=>pads[i]='🥁',200);last=performance.now()};
+    return{pads,last};
+  },(w,h,k,d)=>{
+    d.pads.forEach((p,i)=>{d.ctx.fillStyle='#1e293b';d.ctx.fillRect(i*(w/4)+5,h/2-50,w/4-10,100);d.ctx.font='40px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(p,i*(w/4)+w/8,h/2)});
+  }),
+  G('balloon','Balloon Pop','🎈','Pop',(c,x,cb)=>{
+    let balloons=[],sc=0;
+    setInterval(()=>balloons.push({x:Math.random()*c.width,y:c.height,s:Math.random()*2+1,c:`hsl(${Math.random()*360},70%,60%)`}),800);
+    c.onclick=e=>{const r=c.getBoundingClientRect();balloons.forEach(b=>{if(Math.hypot(b.x-(e.clientX-r.left),b.y-(e.clientY-r.top))<30)b.pop=true})};
+    return{balloons,sc};
+  },(w,h,k,d)=>{
+    d.balloons.forEach(b=>{b.y-=b.s});d.balloons=d.balloons.filter(b=>{if(b.pop){d.sc++;return false}return b.y>0});
+    d.balloons.forEach(b=>{d.ctx.fillStyle=b.c;d.ctx.beginPath();d.ctx.arc(b.x,b.y,20,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Popped: '+d.sc,10,30);
+  }),
+  G('candy','Candy Match','🍬','Swap',(c,x,cb)=>{    let grid=Array(36).fill().map(()=>Math.floor(Math.random()*5)),sel=null,sc=0;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=50,col=Math.floor((e.clientX-r.left-50)/sz),row=Math.floor((e.clientY-r.top-50)/sz);if(col<0||col>5||row<0||row>5)return;const i=row*6+col;if(sel===null)sel=i;else{[grid[sel],grid[i]]=[grid[i],grid[sel]];if(checkMatch(grid))sc+=10;sel=null}};
+    function checkMatch(g){for(let i=0;i<36;i++){const r=Math.floor(i/6),c=i%6;if(c<4&&g[i]===g[i+1]&&g[i]===g[i+2])return true;if(r<4&&g[i]===g[i+6]&&g[i]===g[i+12])return true}return false}
+    return{grid,sel,sc};
+  },(w,h,k,d)=>{
+    const sz=50,ox=50,oy=50;const cols=['#ef4444','#3b82f6','#eab308','#22c55e','#a855f7'];
+    d.grid.forEach((v,i)=>{const r=Math.floor(i/6),c=i%6;d.ctx.fillStyle=d.sel===i?'#fff':cols[v];d.ctx.fillRect(ox+c*sz,oy+r*sz,sz-4,sz-4)});
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('fruit','Fruit Ninja','🍉','Slice',(c,x,cb)=>{
+    let fruits=[],sc=0,drag=false,last={x:0,y:0};
+    setInterval(()=>fruits.push({x:Math.random()*c.width,y:c.height,vy:-Math.random()*5-5,r:20,c:['#ef4444','#eab308','#22c55e'][Math.floor(Math.random()*3)]}),1000);
+    c.onmousedown=e=>{drag=true;const r=c.getBoundingClientRect();last={x:e.clientX-r.left,y:e.clientY-r.top}};
+    c.onmousemove=e=>{if(drag){const r=c.getBoundingClientRect();fruits.forEach(f=>{if(Math.hypot(f.x-(e.clientX-r.left),f.y-(e.clientY-r.top))<f.r)f.cut=true})}};
+    c.onmouseup=()=>drag=false;
+    return{fruits,sc};
+  },(w,h,k,d)=>{
+    d.fruits.forEach(f=>{f.y+=f.vy;f.vy+=0.2});d.fruits=d.fruits.filter(f=>{if(f.cut){d.sc++;return false}return f.y<w});
+    d.fruits.forEach(f=>{d.ctx.fillStyle=f.c;d.ctx.beginPath();d.ctx.arc(f.x,f.y,f.r,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Sliced: '+d.sc,10,30);
+  }),
+  G('angry','Angry Birds','😠','Launch',(c,x,cb)=>{
+    let bird={x:100,y:c.height-100,vx:0,vy:0},blocks=[{x:c.width-150,y:c.height-50,w:30,h:50},{x:c.width-100,y:c.height-50,w:30,h:50}],drag=false;
+    c.onmousedown=e=>{drag=true};c.onmouseup=e=>{if(drag){drag=false;const r=c.getBoundingClientRect();bird.vx=(e.clientX-r.left-bird.x)*0.15;bird.vy=(e.clientY-r.top-bird.y)*0.15}};
+    return{bird,blocks,drag};
+  },(w,h,k,d)=>{
+    d.bird.vy+=0.3;d.bird.x+=d.bird.vx;d.bird.y+=d.bird.vy;
+    d.blocks.forEach(b=>{if(d.bird.x>b.x&&d.bird.x<b.x+b.w&&d.bird.y>b.y&&d.bird.y<b.y+b.h){b.hit=true;d.bird.vx*=0.5;d.bird.vy*=0.5}});
+    d.ctx.fillStyle='#87ceeb';d.ctx.fillRect(0,0,w,h);d.ctx.fillStyle='#166534';d.ctx.fillRect(0,h-30,w,30);
+    d.blocks.forEach(b=>{d.ctx.fillStyle=b.hit?'#94a3b8':'#b45309';d.ctx.fillRect(b.x,b.y,b.w,b.h)});
+    d.ctx.fillStyle='#ef4444';d.ctx.beginPath();d.ctx.arc(d.bird.x,d.bird.y,15,0,7);d.ctx.fill();
+  }),
+  G('subway','Subway Surfers','','Dodge',(c,x,cb)=>{
+    let p={lane:1},obs=[],sc=0,spd=6;
+    setInterval(()=>obs.push({lane:Math.floor(Math.random()*3),y:-50}),1000);
+    c.onclick=e=>{const r=c.getBoundingClientRect();if(e.clientX-r.left<w/3)p.lane=0;else if(e.clientX-r.left<w*2/3)p.lane=1;else p.lane=2};
+    return{p,obs,sc,spd};
+  },(w,h,k,d)=>{
+    d.obs.forEach(o=>o.y+=d.spd);d.obs=d.obs.filter(o=>{if(o.y>h){d.sc++;return false}if(o.lane===d.p.lane&&o.y>h-80&&o.y<h-20){Hub.showMsg('Hit! Score: '+d.sc,'Retry');Hub.current=null;return false}return true});
+    d.ctx.fillStyle='#fbbf24';d.ctx.fillRect(0,0,w,h);
+    for(let i=0;i<3;i++){const lx=w/3*i+d.p.lane===i?w/6:w/3;d.ctx.fillStyle='#cbd5e1';d.ctx.fillRect(lx,0,w/3-10,h)}
+    d.obs.forEach(o=>{d.ctx.fillStyle='#ef4444';d.ctx.fillRect(w/3*o.lane+10,o.y,w/3-20,60)});
+    d.ctx.fillStyle='#3b82f6';d.ctx.fillRect(w/3*d.p.lane+15,h-80,w/3-30,60);
+    d.ctx.fillStyle='#000';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('temple','Temple Run','🏃','Run',(c,x,cb)=>{
+    let p={x:c.width/2},coins=[],sc=0,spd=5;
+    setInterval(()=>coins.push({x:Math.random()*(w-40)+20,y:-20}),800);
+    c.onclick=e=>{const r=c.getBoundingClientRect();p.x=e.clientX-r.left};
+    return{p,coins,sc,spd};  },(w,h,k,d)=>{
+    d.coins.forEach(c=>c.y+=d.spd);d.coins=d.coins.filter(c=>{if(c.y>h)return false;if(Math.hypot(c.x-d.p.x,c.y-(h-50))<30){d.sc++;return false}return true});
+    d.ctx.fillStyle='#92400e';d.ctx.fillRect(0,0,w,h);
+    d.coins.forEach(c=>{d.ctx.fillStyle='#fbbf24';d.ctx.beginPath();d.ctx.arc(c.x,c.y,10,0,7);d.ctx.fill()});
+    d.ctx.fillStyle='#ef4444';d.ctx.fillRect(d.p.x-15,h-60,30,60);
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Coins: '+d.sc,10,30);
+  }),
+  G('royal','Royal Match','','Match',(c,x,cb)=>{
+    let grid=Array(25).fill().map(()=>Math.floor(Math.random()*5)),sc=0;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=50,col=Math.floor((e.clientX-r.left-50)/sz),row=Math.floor((e.clientY-r.top-50)/sz);if(col<0||col>4||row<0||row>4)return;const i=row*5+col;grid[i]=(grid[i]+1)%5;sc+=5};
+    return{grid,sc};
+  },(w,h,k,d)=>{
+    const sz=50,ox=50,oy=50;const cols=['#ef4444','#3b82f6','#eab308','#22c55e','#a855f7'];
+    d.grid.forEach((v,i)=>{const r=Math.floor(i/5),c=i%5;d.ctx.fillStyle=cols[v];d.ctx.fillRect(ox+c*sz,oy+r*sz,sz-4,sz-4)});
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 20px sans-serif';d.ctx.fillText('Score: '+d.sc,10,30);
+  }),
+  G('monopoly','Monopoly Go','','Roll',(c,x,cb)=>{
+    let pos=0,money=1000,roll=0;
+    c.onclick=()=>{roll=Math.floor(Math.random()*6)+1;pos=(pos+roll)%20;if(pos===0)money+=200;else money-=50};
+    return{pos,money,roll};
+  },(w,h,k,d)=>{
+    d.ctx.fillStyle='#0f172a';d.ctx.fillRect(0,0,w,h);
+    for(let i=0;i<20;i++){const a=(i/20)*Math.PI*2-Math.PI/2,x=w/2+Math.cos(a)*150,y=h/2+Math.sin(a)*150;d.ctx.fillStyle=i===d.pos?'#fbbf24':'#334155';d.ctx.beginPath();d.ctx.arc(x,y,20,0,7);d.ctx.fill()}
+    d.ctx.fillStyle='#fff';d.ctx.font='bold 24px sans-serif';d.ctx.textAlign='center';d.ctx.fillText('$'+d.money,w/2,h/2);d.ctx.fillText('Roll: '+d.roll,w/2,h/2+40);d.ctx.textAlign='start';
+  }),
+  G('among','Among Us','👾','Find',(c,x,cb)=>{
+    let crew=['👨‍🚀','👩‍🚀','‍🚀','👽'],impostor=3,found=false;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),i=Math.floor((e.clientX-r.left)/(w/4));if(i===impostor){found=true;Hub.showMsg('🎉 Found Impostor!','Back')}else Hub.showMsg('❌ Wrong!','Back')};
+    return{crew,impostor,found};
+  },(w,h,k,d)=>{
+    d.crew.forEach((c,i)=>{d.ctx.fillStyle='#1e293b';d.ctx.fillRect(i*(w/4)+10,h/2-50,w/4-20,100);d.ctx.font='50px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(c,i*(w/4)+w/8,h/2+10)});
+  }),
+  G('minecraft','Minecraft','⛏️','Build',(c,x,cb)=>{
+    let world=Array(20).fill().map(()=>Array(20).fill(0)),sel=1;
+    c.onclick=e=>{const r=c.getBoundingClientRect(),sz=30,col=Math.floor((e.clientX-r.left)/sz),row=Math.floor((e.clientY-r.top)/sz);if(row<20&&col<20)world[row][col]=sel};
+    return{world,sel};
+  },(w,h,k,d)=>{
+    const sz=30;const cols=['#000','#8B4513','#228B22','#87CEEB'];
+    d.world.forEach((row,r)=>row.forEach((v,c)=>{d.ctx.fillStyle=cols[v];d.ctx.fillRect(c*sz,r*sz,sz-1,sz-1)}));
+    d.ctx.fillStyle='#fff';d.ctx.font='16px sans-serif';d.ctx.fillText('Click to Place Block',10,20);
+  }),
+  G('roblox','Roblox','','Play',(c,x,cb)=>{
+    let games=['🏘️ Brookhaven','🍎 Blox Fruits',' Adopt Me','🏎️ Racing'],sel=0;
+    c.onclick=()=>sel=(sel+1)%games.length;
+    return{games,sel};
+  },(w,h,k,d)=>{
+    d.ctx.fillStyle='#000';d.ctx.fillRect(0,0,w,h);
+    d.games.forEach((g,i)=>{d.ctx.fillStyle=i===d.sel?'#38bdf8':'#334155';d.ctx.fillRect(w/2-100,h/2-60+i*50,200,40);d.ctx.fillStyle='#fff';d.ctx.font='16px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(g,w/2,h/2-35+i*50)});
+    d.ctx.fillText('Click to Select',w/2,h-20);d.ctx.textAlign='start';
+  }),  G('2048','2048','🔢','Merge',(c,x,cb)=>{
+    let grid=Array(16).fill(0),sc=0;
+    function add(){const e=grid.map((v,i)=>v===0?i:-1).filter(i=>i!==-1);if(e.length)grid[e[Math.floor(Math.random()*e.length)]]=2}
+    add();add();
+    c.onclick=()=>{grid=grid.map(v=>v?Math.min(v*2,2048):0);sc+=10;add()};
+    return{grid,sc};
+  },(w,h,k,d)=>{
+    const sz=Math.min(w,h)/4.5,ox=(w-sz*4)/2,oy=(h-sz*4)/2;const cols={0:'#cdc1b4',2:'#eee4da',4:'#ede0c8',8:'#f2b179',16:'#f59563',32:'#f67c5f',64:'#f65e3b',128:'#edcf72',256:'#edcc61',512:'#edc850',1024:'#edc53f',2048:'#edc22e'};
+    d.grid.forEach((v,i)=>{const r=Math.floor(i/4),c=i%4;d.ctx.fillStyle=cols[v]||'#3c3a32';d.ctx.fillRect(ox+c*sz+5,oy+r*sz+5,sz-10,sz-10);if(v){d.ctx.fillStyle='#776e65';d.ctx.font='bold 24px sans-serif';d.ctx.textAlign='center';d.ctx.fillText(v,ox+c*sz+sz/2,oy+r*sz+sz/2+8)}});
+    d.ctx.fillStyle='#776e65';d.ctx.font='bold 20px sans-serif';d.ctx.textAlign='start';d.ctx.fillText('Score: '+d.sc,10,30);
+  })
+];
 
-    <script>
-        const games = [
-            { id: 'cricket', name: '🏏 Cricket', category: 'sports' },
-            { id: 'football', name: '⚽ Football', category: 'sports' },
-            { id: 'hockey', name: '🏑 Hockey', category: 'sports' },
-            { id: 'ludo', name: '🎲 Ludo', category: 'board' },
-            { id: 'carrom', name: '🔴 Carrom', category: 'board' },
-            { id: 'snooker', name: '🎱 Snooker', category: 'board' },
-            { id: 'patti', name: '🃏 Teen Patti', category: 'board' },
-            { id: 'snake', name: '🐍 Snake', category: 'arcade' },
-            { id: 'tetris', name: '📦 Tetris', category: 'puzzle' },
-            { id: 'pacman', name: '👻 Pac-Man', category: 'arcade' },
-            { id: 'flappy', name: '🐦 Flappy Bird', category: 'arcade' },
-            { id: 'racing', name: '🏎️ Racing', category: 'arcade' },
-            { id: 'shooter', name: '🚀 Shooter', category: 'arcade' },
-            { id: 'puzzle', name: '🧩 Jigsaw', category: 'puzzle' },
-            { id: 'memory', name: '🧠 Memory', category: 'puzzle' },
-            { id: 'chess', name: '♟️ Chess', category: 'board' },
-            { id: 'checkers', name: '⚫ Checkers', category: 'board' },
-            { id: 'tictactoe', name: '⭕ Tic Tac Toe', category: 'board' },
-            { id: 'basketball', name: '🏀 Basketball', category: 'sports' },
-            { id: 'tennis', name: '🎾 Tennis', category: 'sports' },
-            { id: 'golf', name: '⛳ Golf', category: 'sports' },
-            { id: 'bowling', name: '🎳 Bowling', category: 'sports' },
-            { id: 'fishing', name: '🎣 Fishing', category: 'arcade' },
-            { id: 'cooking', name: '🍳 Cooking', category: 'arcade' },
-            { id: 'dressup', name: '👗 Dress Up', category: 'arcade' },
-            { id: 'painting', name: '🎨 Painting', category: 'creative' },
-            { id: 'piano', name: '🎹 Piano', category: 'music' },
-            { id: 'drums', name: '🥁 Drums', category: 'music' },
-            { id: 'balloon', name: '🎈 Balloon', category: 'arcade' },
-            { id: 'candy', name: '🍬 Candy Crush', category: 'puzzle' },
-            { id: 'fruit', name: '🍉 Fruit Ninja', category: 'arcade' },
-            { id: 'angry', name: '😠 Angry Birds', category: 'puzzle' },
-            { id: 'subway', name: '🚇 Subway Surfers', category: 'arcade' },
-            { id: 'temple', name: '🏃 Temple Run', category: 'arcade' },
-            { id: 'royal', name: '👑 Royal Match', category: 'puzzle' },
-            { id: 'monopoly', name: '🎩 Monopoly Go', category: 'board' },
-            { id: 'among', name: '👾 Among Us', category: 'arcade' },
-            { id: 'minecraft', name: '⛏️ Minecraft', category: 'arcade' },
-            { id: 'roblox', name: '🎮 Roblox', category: 'arcade' },
-            { id: '2048', name: '🔢 2048', category: 'puzzle' }
-        ];
-        let currentGame = null;
-        let gameInterval = null;
-
-        function createGameCard(game) {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-thumb">${game.name.split(' ')[0]}</div>
-                <div class="game-info">
-                    <h3>${game.name}</h3>
-                    <p>Click to Play</p>
-                </div>
-            `;
-            card.onclick = () => openGame(game);
-            return card;
-        }
-
-        function openGame(game) {
-            currentGame = game;
-            document.getElementById('gameTitle').textContent = game.name;
-            document.getElementById('gameOverlay').classList.add('active');
-            document.getElementById('gameContainer').innerHTML = '';
-            
-            const container = document.getElementById('gameContainer');
-            
-            switch(game.id) {
-                case 'cricket': loadCricket(container); break;
-                case 'football': loadFootball(container); break;
-                case 'hockey': loadHockey(container); break;
-                case 'ludo': loadLudo(container); break;
-                case 'carrom': loadCarrom(container); break;
-                case 'snooker': loadSnooker(container); break;
-                case 'patti': loadPatti(container); break;
-                case 'snake': loadSnake(container); break;
-                case 'tetris': loadTetris(container); break;
-                case 'pacman': loadPacman(container); break;
-                case 'flappy': loadFlappy(container); break;
-                case 'racing': loadRacing(container); break;
-                case 'shooter': loadShooter(container); break;
-                case 'puzzle': loadPuzzle(container); break;
-                case 'memory': loadMemory(container); break;
-                case 'chess': loadChess(container); break;
-                case 'checkers': loadCheckers(container); break;
-                case 'tictactoe': loadTicTacToe(container); break;
-                case 'basketball': loadBasketball(container); break;
-                case 'tennis': loadTennis(container); break;
-                case 'golf': loadGolf(container); break;
-                case 'bowling': loadBowling(container); break;
-                case 'fishing': loadFishing(container); break;
-                case 'cooking': loadCooking(container); break;                case 'dressup': loadDressUp(container); break;
-                case 'painting': loadPainting(container); break;
-                case 'piano': loadPiano(container); break;
-                case 'drums': loadDrums(container); break;
-                case 'balloon': loadBalloon(container); break;
-                case 'candy': loadCandyCrush(container); break;
-                case 'fruit': loadFruitNinja(container); break;
-                case 'angry': loadAngryBirds(container); break;
-                case 'subway': loadSubwaySurfers(container); break;
-                case 'temple': loadTempleRun(container); break;
-                case 'royal': loadRoyalMatch(container); break;
-                case 'monopoly': loadMonopolyGo(container); break;
-                case 'among': loadAmongUs(container); break;
-                case 'minecraft': loadMinecraft(container); break;
-                case 'roblox': loadRoblox(container); break;
-                case '2048': load2048(container); break;
-            }
-        }
-
-        function closeGame() {
-            document.getElementById('gameOverlay').classList.remove('active');
-            document.getElementById('gameContainer').innerHTML = '';
-            if (gameInterval) {
-                clearInterval(gameInterval);
-                gameInterval = null;
-            }
-            currentGame = null;
-        }
-
-        // GAMES 1-8 (Already working)
-        function loadCricket(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            function resize() {
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-            }
-            resize();
-            
-            let ball = { x: canvas.width/2, y: 100, dy: 3 };
-            let bat = { x: canvas.width/2, width: 80, height: 15 };
-            let score = 0;
-            
-            canvas.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                bat.x = e.clientX - rect.left - bat.width/2;
-            });
-                        canvas.addEventListener('click', () => {
-                if (Math.abs(ball.x - (bat.x + bat.width/2)) < bat.width/2 + 10 && 
-                    ball.y > canvas.height - bat.height - 20 && 
-                    ball.y < canvas.height - bat.height + 20) {
-                    ball.dy = -5;
-                    score += 6;
-                }
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#87CEEB';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#D2B48C';
-                ctx.fillRect(canvas.width/2 - 50, 0, 100, canvas.height);
-                
-                ctx.fillStyle = '#8B4513';
-                for (let i = -1; i <= 1; i++) {
-                    ctx.fillRect(canvas.width/2 + i*15 - 3, 20, 6, 40);
-                }
-                
-                ctx.fillStyle = '#FF0000';
-                ctx.beginPath();
-                ctx.arc(ball.x, ball.y, 8, 0, Math.PI*2);
-                ctx.fill();
-                
-                ctx.fillStyle = '#8B4513';
-                ctx.fillRect(bat.x, canvas.height - 30, bat.width, bat.height);
-                
-                ctx.fillStyle = '#000';
-                ctx.font = 'bold 24px Arial';
-                ctx.fillText('Score: ' + score, 10, 30);
-                
-                ball.y += ball.dy;
-                if (ball.y > canvas.height) {
-                    ball.y = 100;
-                    ball.dy = 3 + Math.random() * 2;
-                }
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }
-            update();
-        }
-
-        function loadFootball(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-                        function resize() {
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-            }
-            resize();
-            
-            let ball = { x: canvas.width/2, y: canvas.height/2, dx: 0, dy: 0 };
-            let score = 0;
-            
-            canvas.addEventListener('click', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                ball.dx = (x - ball.x) * 0.1;
-                ball.dy = (y - ball.y) * 0.1;
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#228B22';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#FFF';
-                ctx.fillRect(canvas.width/2 - 100, 20, 200, 60);
-                
-                ctx.fillStyle = '#FFF';
-                ctx.beginPath();
-                ctx.arc(ball.x, ball.y, 12, 0, Math.PI*2);
-                ctx.fill();
-                
-                ball.x += ball.dx;
-                ball.y += ball.dy;
-                ball.dx *= 0.98;
-                ball.dy *= 0.98;
-                
-                if (ball.x < 0 || ball.x > canvas.width) ball.dx *= -1;
-                if (ball.y < 0 || ball.y > canvas.height) ball.dy *= -1;
-                
-                if (ball.y < 80 && ball.x > canvas.width/2 - 100 && ball.x < canvas.width/2 + 100) {
-                    score++;
-                    ball.x = canvas.width/2;
-                    ball.y = canvas.height/2;
-                }
-                
-                ctx.fillStyle = '#FFF';
-                ctx.font = 'bold 24px Arial';
-                ctx.fillText('Goals: ' + score, 10, 30);
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }            update();
-        }
-
-        function loadHockey(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            function resize() {
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-            }
-            resize();
-            
-            let puck = { x: canvas.width/2, y: canvas.height/2, dx: 0, dy: 0 };
-            let paddle1 = { x: canvas.width/2, y: canvas.height - 50 };
-            let paddle2 = { x: canvas.width/2, y: 50 };
-            let score1 = 0, score2 = 0;
-            
-            canvas.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                paddle1.x = e.clientX - rect.left;
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#1e3c72';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.strokeStyle = '#FFF';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(0, canvas.height/2);
-                ctx.lineTo(canvas.width, canvas.height/2);
-                ctx.stroke();
-                
-                ctx.fillStyle = '#000';
-                ctx.beginPath();
-                ctx.arc(puck.x, puck.y, 12, 0, Math.PI*2);
-                ctx.fill();
-                
-                ctx.fillStyle = '#ff6b6b';
-                ctx.beginPath();
-                ctx.arc(paddle1.x, paddle1.y, 25, 0, Math.PI*2);
-                ctx.fill();
-                
-                ctx.fillStyle = '#4ecdc4';
-                ctx.beginPath();
-                ctx.arc(paddle2.x, paddle2.y, 25, 0, Math.PI*2);
-                ctx.fill();                
-                puck.x += puck.dx;
-                puck.y += puck.dy;
-                puck.dx *= 0.99;
-                puck.dy *= 0.99;
-                
-                if (puck.x < 12 || puck.x > canvas.width - 12) puck.dx *= -1;
-                if (puck.y < 12) { score1++; puck.x = canvas.width/2; puck.y = canvas.height/2; }
-                if (puck.y > canvas.height - 12) { score2++; puck.x = canvas.width/2; puck.y = canvas.height/2; }
-                
-                paddle2.x += (puck.x - paddle2.x) * 0.05;
-                
-                ctx.fillStyle = '#FFF';
-                ctx.font = 'bold 24px Arial';
-                ctx.fillText(score1 + ' - ' + score2, canvas.width/2 - 30, 30);
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }
-            update();
-        }
-
-        function loadLudo(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <div style="background:white;padding:20px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.3);">
-                        <h2 style="text-align:center;margin-bottom:20px;color:#667eea;">🎲 Ludo</h2>
-                        <div id="ludoBoard" style="width:400px;height:400px;background:#fff;border:3px solid #333;display:grid;grid-template-columns:repeat(15,1fr);grid-template-rows:repeat(15,1fr);"></div>
-                        <div style="text-align:center;margin-top:20px;">
-                            <button onclick="rollDice()" style="padding:10px 30px;font-size:18px;background:#667eea;color:white;border:none;border-radius:10px;cursor:pointer;">Roll Dice 🎲</button>
-                            <div id="diceResult" style="margin-top:10px;font-size:24px;font-weight:bold;color:#667eea;"></div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            const board = document.getElementById('ludoBoard');
-            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#95e1d3'];
-            
-            for (let i = 0; i < 225; i++) {
-                const cell = document.createElement('div');
-                cell.style.border = '1px solid #ddd';
-                if (i < 6 || i > 218) cell.style.background = colors[0];
-                else if (i > 59 && i < 66) cell.style.background = colors[1];
-                else if (i > 119 && i < 126) cell.style.background = colors[2];
-                else if (i > 179 && i < 186) cell.style.background = colors[3];
-                board.appendChild(cell);
-            }
-        }
-
-        function rollDice() {            const dice = Math.floor(Math.random() * 6) + 1;
-            document.getElementById('diceResult').textContent = '🎲 ' + dice;
-        }
-
-        function loadCarrom(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = 500;
-            canvas.height = 500;
-            
-            let striker = { x: 250, y: 400, radius: 15, vx: 0, vy: 0 };
-            const coins = [
-                { x: 250, y: 250, radius: 10, color: '#fff' },
-                { x: 230, y: 230, radius: 8, color: '#000' },
-                { x: 270, y: 230, radius: 8, color: '#000' },
-                { x: 250, y: 270, radius: 8, color: '#fff' }
-            ];
-            
-            let dragging = false;
-            
-            canvas.addEventListener('mousedown', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                if (Math.hypot(x - striker.x, y - striker.y) < striker.radius) {
-                    dragging = true;
-                }
-            });
-            
-            canvas.addEventListener('mousemove', (e) => {
-                if (dragging) {
-                    const rect = canvas.getBoundingClientRect();
-                    striker.x = e.clientX - rect.left;
-                    striker.y = e.clientY - rect.top;
-                }
-            });
-            
-            canvas.addEventListener('mouseup', (e) => {
-                if (dragging) {
-                    const rect = canvas.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    striker.vx = (250 - x) * 0.1;
-                    striker.vy = (400 - y) * 0.1;
-                    dragging = false;
-                }
-            });
-                        function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#DEB887';
-                ctx.fillRect(0, 0, 500, 500);
-                
-                ctx.fillStyle = '#000';
-                [[25,25], [475,25], [25,475], [475,475]].forEach(([x,y]) => {
-                    ctx.beginPath();
-                    ctx.arc(x, y, 20, 0, Math.PI*2);
-                    ctx.fill();
-                });
-                
-                coins.forEach(coin => {
-                    ctx.fillStyle = coin.color;
-                    ctx.beginPath();
-                    ctx.arc(coin.x, coin.y, coin.radius, 0, Math.PI*2);
-                    ctx.fill();
-                    ctx.strokeStyle = '#000';
-                    ctx.stroke();
-                });
-                
-                ctx.fillStyle = '#ff6b6b';
-                ctx.beginPath();
-                ctx.arc(striker.x, striker.y, striker.radius, 0, Math.PI*2);
-                ctx.fill();
-                
-                striker.x += striker.vx;
-                striker.y += striker.vy;
-                striker.vx *= 0.98;
-                striker.vy *= 0.98;
-                
-                if (striker.x < 15 || striker.x > 485) striker.vx *= -1;
-                if (striker.y < 15 || striker.y > 485) striker.vy *= -1;
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }
-            update();
-        }
-
-        function loadSnooker(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = 700;
-            canvas.height = 350;
-            
-            const cueBall = { x: 200, y: 175, radius: 8, vx: 0, vy: 0 };
-            const balls = [];
-            const colors = ['#ff0000', '#ffff00', '#000000', '#ff69b4', '#ffa500'];            
-            for (let row = 0; row < 5; row++) {
-                for (let col = 0; col <= row; col++) {
-                    balls.push({
-                        x: 500 + row * 16,
-                        y: 175 - row * 8 + col * 16,
-                        radius: 8,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        vx: 0, vy: 0
-                    });
-                }
-            }
-            
-            let aiming = false;
-            let aimAngle = 0;
-            
-            canvas.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                aimAngle = Math.atan2(y - cueBall.y, x - cueBall.x);
-            });
-            
-            canvas.addEventListener('click', () => {
-                if (!aiming) {
-                    aiming = true;
-                    cueBall.vx = Math.cos(aimAngle) * 10;
-                    cueBall.vy = Math.sin(aimAngle) * 10;
-                }
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#0d5c3b';
-                ctx.fillRect(0, 0, 700, 350);
-                
-                ctx.fillStyle = '#000';
-                [[0,0], [350,0], [700,0], [0,350], [350,350], [700,350]].forEach(([x,y]) => {
-                    ctx.beginPath();
-                    ctx.arc(x, y, 15, 0, Math.PI*2);
-                    ctx.fill();
-                });
-                
-                balls.forEach(ball => {
-                    ctx.fillStyle = ball.color;
-                    ctx.beginPath();
-                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
-                    ctx.fill();
-                    ctx.strokeStyle = '#fff';
-                    ctx.stroke();                });
-                
-                ctx.fillStyle = '#fff';
-                ctx.beginPath();
-                ctx.arc(cueBall.x, cueBall.y, cueBall.radius, 0, Math.PI*2);
-                ctx.fill();
-                
-                if (!aiming) {
-                    ctx.strokeStyle = '#8B4513';
-                    ctx.lineWidth = 4;
-                    ctx.beginPath();
-                    ctx.moveTo(cueBall.x, cueBall.y);
-                    ctx.lineTo(cueBall.x - Math.cos(aimAngle) * 100, cueBall.y - Math.sin(aimAngle) * 100);
-                    ctx.stroke();
-                }
-                
-                cueBall.x += cueBall.vx;
-                cueBall.y += cueBall.vy;
-                cueBall.vx *= 0.985;
-                cueBall.vy *= 0.985;
-                
-                if (cueBall.x < 8 || cueBall.x > 692) cueBall.vx *= -1;
-                if (cueBall.y < 8 || cueBall.y > 342) cueBall.vy *= -1;
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }
-            update();
-        }
-
-        function loadPatti(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
-                    <div style="background:linear-gradient(135deg, #0d5c3b 0%, #1a472a 100%);padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.5);text-align:center;">
-                        <h2 style="color:#fff;margin-bottom:20px;">🃏 Teen Patti</h2>
-                        <div id="cards" style="display:flex;gap:10px;justify-content:center;margin:20px 0;"></div>
-                        <div style="color:#fff;font-size:20px;margin:10px 0;">💰 Chips: <span id="chips">1000</span></div>
-                        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;">
-                            <button onclick="dealCards()" style="padding:10px 20px;background:#ff6b6b;color:white;border:none;border-radius:10px;cursor:pointer;font-size:16px;">Deal 🎴</button>
-                            <button onclick="fold()" style="padding:10px 20px;background:#4ecdc4;color:white;border:none;border-radius:10px;cursor:pointer;font-size:16px;">Fold</button>
-                            <button onclick="play()" style="padding:10px 20px;background:#ffe66d;color:#333;border:none;border-radius:10px;cursor:pointer;font-size:16px;">Play ▶️</button>
-                        </div>
-                        <div id="result" style="color:#fff;margin-top:20px;font-size:18px;"></div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function dealCards() {
-            const cardsDiv = document.getElementById('cards');
-            cardsDiv.innerHTML = '';            const suits = ['♠', '♥', '♦', '♣'];
-            const values = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
-            
-            for (let i = 0; i < 3; i++) {
-                const suit = suits[Math.floor(Math.random() * suits.length)];
-                const value = values[Math.floor(Math.random() * values.length)];
-                const card = document.createElement('div');
-                card.style.cssText = 'width:60px;height:90px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;color:' + (suit === '♥' || suit === '♦' ? 'red' : 'black') + ';box-shadow:0 4px 8px rgba(0,0,0,0.2);';
-                card.textContent = value + suit;
-                cardsDiv.appendChild(card);
-            }
-        }
-
-        function fold() {
-            document.getElementById('result').textContent = 'You folded!';
-        }
-
-        function play() {
-            document.getElementById('result').textContent = 'Game in progress...';
-        }
-
-        function loadSnake(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            function resize() {
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-            }
-            resize();
-            
-            const snake = [{x: 10, y: 10}];
-            let food = {x: 15, y: 15};
-            let dx = 1, dy = 0;
-            let score = 0;
-            const gridSize = 20;
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; }
-                if (e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; }
-                if (e.key === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; }
-                if (e.key === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; }
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                
-                const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-                snake.unshift(head);                
-                if (head.x === food.x && head.y === food.y) {
-                    score += 10;
-                    food = {
-                        x: Math.floor(Math.random() * (canvas.width/gridSize)),
-                        y: Math.floor(Math.random() * (canvas.height/gridSize))
-                    };
-                } else {
-                    snake.pop();
-                }
-                
-                ctx.fillStyle = '#000';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#0f0';
-                snake.forEach(seg => {
-                    ctx.fillRect(seg.x * gridSize, seg.y * gridSize, gridSize-2, gridSize-2);
-                });
-                
-                ctx.fillStyle = '#f00';
-                ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize-2, gridSize-2);
-                
-                ctx.fillStyle = '#fff';
-                ctx.font = 'bold 20px Arial';
-                ctx.fillText('Score: ' + score, 10, 30);
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 100);
-            }
-            update();
-        }
-
-        // GAMES 9-40 (New trending games)
-        function loadTetris(container) { createPlaceholder(container, '📦 Tetris'); }
-        function loadPacman(container) { createPlaceholder(container, '👻 Pac-Man'); }
-        function loadFlappy(container) { createPlaceholder(container, '🐦 Flappy Bird'); }
-        function loadRacing(container) { createPlaceholder(container, '🏎️ Racing'); }
-        function loadShooter(container) { createPlaceholder(container, '🚀 Shooter'); }
-        function loadPuzzle(container) { createPlaceholder(container, '🧩 Jigsaw'); }
-        function loadMemory(container) { createPlaceholder(container, '🧠 Memory'); }
-        function loadChess(container) { createPlaceholder(container, '♟️ Chess'); }
-        function loadCheckers(container) { createPlaceholder(container, '⚫ Checkers'); }
-        function loadTicTacToe(container) { createPlaceholder(container, '⭕ Tic Tac Toe'); }
-        function loadBasketball(container) { createPlaceholder(container, '🏀 Basketball'); }
-        function loadTennis(container) { createPlaceholder(container, '🎾 Tennis'); }
-        function loadGolf(container) { createPlaceholder(container, '⛳ Golf'); }
-        function loadBowling(container) { createPlaceholder(container, '🎳 Bowling'); }
-        function loadFishing(container) { createPlaceholder(container, '🎣 Fishing'); }
-        function loadCooking(container) { createPlaceholder(container, '🍳 Cooking'); }
-        function loadDressUp(container) { createPlaceholder(container, '👗 Dress Up'); }
-        function loadPainting(container) { createPlaceholder(container, '🎨 Painting'); }        function loadPiano(container) { createPlaceholder(container, '🎹 Piano'); }
-        function loadDrums(container) { createPlaceholder(container, '🥁 Drums'); }
-        function loadBalloon(container) { createPlaceholder(container, '🎈 Balloon'); }
-        
-        function loadCandyCrush(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);">
-                    <div style="text-align:center;color:white;">
-                        <h2 style="font-size:3rem;margin-bottom:1rem;">🍬 Candy Crush</h2>
-                        <p style="font-size:1.5rem;">Match 3 candies to win!</p>
-                        <div id="candyGrid" style="display:grid;grid-template-columns:repeat(6,60px);gap:5px;margin:2rem auto;max-width:400px;"></div>
-                        <div style="font-size:2rem;margin-top:1rem;">Score: <span id="score">0</span></div>
-                    </div>
-                </div>
-            `;
-            
-            const grid = document.getElementById('candyGrid');
-            const candies = ['🍬', '🍭', '', '', '', ''];
-            let score = 0;
-            
-            for (let i = 0; i < 36; i++) {
-                const cell = document.createElement('div');
-                cell.style.cssText = 'width:60px;height:60px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;';
-                cell.textContent = candies[Math.floor(Math.random() * candies.length)];
-                cell.onclick = () => {
-                    cell.textContent = candies[Math.floor(Math.random() * candies.length)];
-                    score += 10;
-                    document.getElementById('score').textContent = score;
-                };
-                grid.appendChild(cell);
-            }
-        }
-
-        function loadFruitNinja(container) { createPlaceholder(container, '🍉 Fruit Ninja'); }
-        function loadAngryBirds(container) { createPlaceholder(container, '😠 Angry Birds'); }
-        
-        function loadSubwaySurfers(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            function resize() {
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-            }
-            resize();
-            
-            let player = { x: canvas.width/2, y: canvas.height - 100, width: 40, height: 60 };
-            let obstacles = [];
-            let score = 0;            let lane = 1;
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft' && lane > 0) lane--;
-                if (e.key === 'ArrowRight' && lane < 2) lane++;
-                player.x = canvas.width/2 + (lane - 1) * 100;
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#FFD700';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Roads
-                ctx.fillStyle = '#555';
-                for (let i = 0; i < 3; i++) {
-                    ctx.fillRect(canvas.width/2 - 150 + i*100, 0, 80, canvas.height);
-                }
-                
-                // Player
-                ctx.fillStyle = '#ff6b6b';
-                ctx.fillRect(player.x - player.width/2, player.y, player.width, player.height);
-                
-                // Obstacles
-                if (Math.random() < 0.02) {
-                    obstacles.push({
-                        x: canvas.width/2 + (Math.floor(Math.random() * 3) - 1) * 100,
-                        y: -50,
-                        width: 60,
-                        height: 40
-                    });
-                }
-                
-                ctx.fillStyle = '#8B4513';
-                obstacles.forEach((obs, i) => {
-                    obs.y += 5;
-                    ctx.fillRect(obs.x - obs.width/2, obs.y, obs.width, obs.height);
-                    
-                    if (obs.y > canvas.height) {
-                        obstacles.splice(i, 1);
-                        score++;
-                    }
-                    
-                    if (Math.abs(obs.x - player.x) < 50 && Math.abs(obs.y - player.y) < 50) {
-                        ctx.fillStyle = '#fff';
-                        ctx.font = 'bold 40px Arial';
-                        ctx.fillText('Game Over!', canvas.width/2 - 120, canvas.height/2);
-                        return;
-                    }
-                });                
-                ctx.fillStyle = '#000';
-                ctx.font = 'bold 24px Arial';
-                ctx.fillText('Score: ' + score, 10, 30);
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }
-            update();
-        }
-
-        function loadTempleRun(container) {
-            const canvas = document.createElement('canvas');
-            container.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            
-            function resize() {
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-            }
-            resize();
-            
-            let player = { x: canvas.width/2, y: canvas.height/2, width: 30, height: 50 };
-            let coins = [];
-            let score = 0;
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') player.x -= 50;
-                if (e.key === 'ArrowRight') player.x += 50;
-                if (e.key === 'ArrowUp') player.y -= 50;
-                if (e.key === 'ArrowDown') player.y += 50;
-            });
-            
-            function update() {
-                if (!currentGame) return;
-                ctx.fillStyle = '#228B22';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Temple path
-                ctx.fillStyle = '#8B4513';
-                ctx.fillRect(canvas.width/2 - 100, 0, 200, canvas.height);
-                
-                // Player
-                ctx.fillStyle = '#ff6b6b';
-                ctx.fillRect(player.x - player.width/2, player.y, player.width, player.height);
-                
-                // Coins
-                if (Math.random() < 0.05) {
-                    coins.push({
-                        x: canvas.width/2 - 80 + Math.random() * 160,
-                        y: -20                    });
-                }
-                
-                ctx.fillStyle = '#FFD700';
-                coins.forEach((coin, i) => {
-                    coin.y += 3;
-                    ctx.beginPath();
-                    ctx.arc(coin.x, coin.y, 10, 0, Math.PI*2);
-                    ctx.fill();
-                    
-                    if (Math.hypot(coin.x - player.x, coin.y - player.y) < 30) {
-                        coins.splice(i, 1);
-                        score++;
-                    }
-                    
-                    if (coin.y > canvas.height) coins.splice(i, 1);
-                });
-                
-                ctx.fillStyle = '#fff';
-                ctx.font = 'bold 24px Arial';
-                ctx.fillText('Coins: ' + score, 10, 30);
-                
-                gameInterval = setTimeout(() => requestAnimationFrame(update), 16);
-            }
-            update();
-        }
-
-        function loadRoyalMatch(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <div style="background:white;padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.3);text-align:center;">
-                        <h2 style="color:#667eea;margin-bottom:1rem;">👑 Royal Match</h2>
-                        <div id="royalGrid" style="display:grid;grid-template-columns:repeat(6,50px);gap:5px;margin:1rem auto;"></div>
-                        <div style="color:#667eea;font-size:1.5rem;margin-top:1rem;">Level: <span id="level">1</span></div>
-                    </div>
-                </div>
-            `;
-            
-            const grid = document.getElementById('royalGrid');
-            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#95e1d3', '#f093fb'];
-            
-            for (let i = 0; i < 36; i++) {
-                const cell = document.createElement('div');
-                cell.style.cssText = 'width:50px;height:50px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.2s;';
-                cell.style.background = colors[Math.floor(Math.random() * colors.length)];
-                cell.onmouseover = () => cell.style.transform = 'scale(1.1)';
-                cell.onmouseout = () => cell.style.transform = 'scale(1)';
-                cell.onclick = () => {
-                    cell.style.background = colors[Math.floor(Math.random() * colors.length)];
-                };                grid.appendChild(cell);
-            }
-        }
-
-        function loadMonopolyGo(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
-                    <div style="background:white;padding:30px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.3);text-align:center;">
-                        <h2 style="color:#1e3c72;margin-bottom:1rem;">🎩 Monopoly Go</h2>
-                        <div style="font-size:4rem;margin:1rem;">🎲</div>
-                        <div style="color:#333;font-size:1.5rem;margin:1rem;">Money: $<span id="money">1000</span></div>
-                        <button onclick="rollDice()" style="padding:10px 30px;font-size:18px;background:#1e3c72;color:white;border:none;border-radius:10px;cursor:pointer;margin:10px;">Roll Dice</button>
-                        <button onclick="buyProperty()" style="padding:10px 30px;font-size:18px;background:#28a745;color:white;border:none;border-radius:10px;cursor:pointer;margin:10px;">Buy Property</button>
-                        <div id="msg" style="margin-top:1rem;color:#666;"></div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function loadAmongUs(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #0f0c29 0%, #302b63 100%);">
-                    <div style="text-align:center;color:white;">
-                        <h2 style="font-size:3rem;margin-bottom:1rem;">👾 Among Us</h2>
-                        <div style="display:flex;gap:20px;justify-content:center;margin:2rem;">
-                            <div style="width:80px;height:100px;background:#ff6b6b;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:3rem;">👨‍🚀</div>
-                            <div style="width:80px;height:100px;background:#4ecdc4;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:3rem;">👨‍🚀</div>
-                            <div style="width:80px;height:100px;background:#ffe66d;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:3rem;">👨‍🚀</div>
-                        </div>
-                        <p style="font-size:1.5rem;">Find the Impostor!</p>
-                        <button onclick="startGame()" style="margin-top:20px;padding:15px 30px;font-size:18px;background:#ff6b6b;color:white;border:none;border-radius:10px;cursor:pointer;">Start Game</button>
-                        <div id="amongResult" style="margin-top:20px;font-size:1.5rem;"></div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function loadMinecraft(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);">
-                    <div style="text-align:center;color:white;">
-                        <h2 style="font-size:3rem;margin-bottom:1rem;">⛏️ Minecraft</h2>
-                        <div style="display:grid;grid-template-columns:repeat(4,60px);gap:5px;margin:2rem auto;max-width:300px;">
-                            <div style="width:60px;height:60px;background:#8B4513;border:2px solid #fff;"></div>
-                            <div style="width:60px;height:60px;background:#228B22;border:2px solid #fff;"></div>
-                            <div style="width:60px;height:60px;background:#87CEEB;border:2px solid #fff;"></div>
-                            <div style="width:60px;height:60px;background:#808080;border:2px solid #fff;"></div>
-                        </div>
-                        <p style="font-size:1.5rem;">Build & Explore!</p>
-                    </div>                </div>
-            `;
-        }
-
-        function loadRoblox(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #000 0%, #333 100%);">
-                    <div style="text-align:center;color:white;">
-                        <h2 style="font-size:3rem;margin-bottom:1rem;">🎮 Roblox</h2>
-                        <div style="display:flex;gap:20px;justify-content:center;margin:2rem;flex-wrap:wrap;">
-                            <div style="padding:20px;background:#667eea;border-radius:10px;min-width:150px;">
-                                <div style="font-size:2rem;">🏘️</div>
-                                <div>Brookhaven RP</div>
-                            </div>
-                            <div style="padding:20px;background:#f093fb;border-radius:10px;min-width:150px;">
-                                <div style="font-size:2rem;">🍎</div>
-                                <div>Blox Fruits</div>
-                            </div>
-                            <div style="padding:20px;background:#4ecdc4;border-radius:10px;min-width:150px;">
-                                <div style="font-size:2rem;">🐾</div>
-                                <div>Adopt Me!</div>
-                            </div>
-                        </div>
-                        <p style="font-size:1.5rem;">Play Together!</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function load2048(container) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
-                    <div style="background:#bbada0;padding:20px;border-radius:10px;">
-                        <h2 style="text-align:center;color:#776e65;margin-bottom:1rem;">🔢 2048</h2>
-                        <div id="grid2048" style="display:grid;grid-template-columns:repeat(4,80px);gap:10px;"></div>
-                        <div style="text-align:center;margin-top:1rem;color:#776e65;">Score: <span id="score2048">0</span></div>
-                        <p style="text-align:center;color:#776e65;margin-top:1rem;">Use Arrow Keys</p>
-                    </div>
-                </div>
-            `;
-            
-            const grid = document.getElementById('grid2048');
-            let board = Array(16).fill(0);
-            let score = 0;
-            
-            function render() {
-                grid.innerHTML = '';
-                board.forEach((val, i) => {
-                    const cell = document.createElement('div');
-                    cell.style.cssText = 'width:80px;height:80px;background:' + (val ? '#eed184' : '#cdc1b4') + ';border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;color:#776e65;';                    cell.textContent = val || '';
-                    grid.appendChild(cell);
-                });
-                document.getElementById('score2048').textContent = score;
-            }
-            
-            document.addEventListener('keydown', (e) => {
-                if (!currentGame || currentGame.id !== '2048') return;
-                let moved = false;
-                if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    moved = true;
-                    score += 1;
-                    render();
-                }
-            });
-            
-            render();
-        }
-
-        function createPlaceholder(container, name) {
-            container.innerHTML = `
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;font-size:2rem;text-align:center;padding:2rem;">
-                    <div>
-                        <div style="font-size:4rem;margin-bottom:1rem;">🎮</div>
-                        <div>${name}</div>
-                        <div style="font-size:1rem;margin-top:1rem;opacity:0.8;">Coming Soon!</div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Initialize
-        window.onload = () => {
-            const grid = document.getElementById('gamesGrid');
-            games.forEach(game => {
-                grid.appendChild(createGameCard(game));
-            });
-        };
-    </script>
+// INIT
+Hub.init();
+</script>
 </body>
 </html>
